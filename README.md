@@ -11,11 +11,11 @@ The games and sessions are tailored to each pair's common interests, entered dur
 * [MongoDB](https://www.mongodb.com/atlas/app-services) - MongoDB is a document-oriented NoSQL database.
 
 ## Team members
-* Ohad Segal
-* Idan Cohen
-* Eran Yosefia
+* [Ohad Segal](https://github.com/OhadSeg)
+* [Idan Cohen](https://github.com/idanco050)
+* [Eran Yosefia](https://github.com/EranYosefia)
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/OhadSeg/Match-Match/blob/main/LICENSE) file for details
 
 
