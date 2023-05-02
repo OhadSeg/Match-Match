@@ -1,0 +1,8 @@
+.row {
+    flex-direction: row !important;
+  }
+  
+  .row>* {
+    margin: 5px;
+  }
+
