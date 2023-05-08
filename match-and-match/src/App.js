@@ -1,4 +1,5 @@
 import "./App.css";
+import ChatScreen from "./pages/ChatScreen/ChatScreen";
 import ChatsPage from "./pages/Chats/Chats";
 import HomePage from "./pages/Home/Home";
 import RootLayout from "./pages/Root";
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage /> },
       { path: '/chat', element: <ChatsPage /> },
+      { path: '/chat/:person', element: <ChatScreen/>}
     ],
   }
 ]);
