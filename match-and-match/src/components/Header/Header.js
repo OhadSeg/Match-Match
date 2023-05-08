@@ -1,19 +1,20 @@
 import React from "react";
-import "./Header.css"
+import "./Header.css";
 import PersonIcon from "@mui/icons-material/Person";
 import ForumIcon from "@mui/icons-material/Forum";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import  { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom";
 
-function Header({ backButton }) {
-  const navigate = useNavigate();
+function Header({ backButtonPath }) {
   return (
     <div className="header">
-      {backButton ? (
-        <IconButton onClick={() => navigate(backButton)}>
-          <ArrowBackIosIcon className="header__icon" fontSize="large" />
-        </IconButton>
+      {backButtonPath ? (
+        <Link to={backButtonPath}>
+          <IconButton>
+            <ArrowBackIosIcon className="header__icon" fontSize="large" />
+          </IconButton>
+        </Link>
       ) : (
         <IconButton>
           <PersonIcon className="header__icon" fontSize="large" />
