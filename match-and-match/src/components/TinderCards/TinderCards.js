@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef } from 'react'
 import TinderCard from 'react-tinder-card'
-import './TinderCards.css'
+import styles from './TinderCards.module.css'
 
 const db = [
   {
@@ -78,7 +78,7 @@ const TinderCards = () => {
   }
 
   return (
-    <div className='main-div'>
+    <div className={styles['main-div']}>
       <link
         href='https://fonts.googleapis.com/css?family=Damion&display=swap'
         rel='stylesheet'
@@ -87,35 +87,35 @@ const TinderCards = () => {
         href='https://fonts.googleapis.com/css?family=Alatsi&display=swap'
         rel='stylesheet'
       />
-      <div className='cardContainer'>
+      <div className={styles.cardContainer}>
         {db.map((character, index) => (
           <TinderCard
             ref={childRefs[index]}
-            className='swipe'
+            className={styles.swipe}
             key={character.name}
             onSwipe={(dir) => swiped(dir, character.name, index)}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <div
               style={{ backgroundImage: 'url(' + character.url + ')' }}
-              className='card'
+              className={styles.card}
             >
               <h3>{character.name}</h3>
             </div>
           </TinderCard>
         ))}
       </div>
-      <div className='buttons'>
+      <div className={styles.buttons}>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
         <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
       </div>
       {lastDirection ? (
-        <h2 key={lastDirection} className='infoText'>
+        <h2 key={lastDirection} className={styles.infoText}>
           You swiped {lastDirection}
         </h2>
       ) : (
-        <h2 className='infoText'>
+        <h2 className={styles.infoText}>
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
       )}

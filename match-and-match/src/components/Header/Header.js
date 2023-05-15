@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.css";
+import styles from "./Header.module.css";
 import PersonIcon from "@mui/icons-material/Person";
 import ForumIcon from "@mui/icons-material/Forum";
 import IconButton from "@mui/material/IconButton";
@@ -8,28 +8,28 @@ import { Link } from "react-router-dom";
 
 function Header({ backButtonPath }) {
   return (
-    <div className="header">
+    <div className={styles.header}>
       {backButtonPath ? (
         <Link to={backButtonPath}>
           <IconButton>
-            <ArrowBackIosIcon className="header__icon" fontSize="large" />
+            <ArrowBackIosIcon className={styles.header__icon} fontSize="large" />
           </IconButton>
         </Link>
       ) : (
         <IconButton>
-          <PersonIcon className="header__icon" fontSize="large" />
+          <PersonIcon className={styles.header__icon} fontSize="large" />
         </IconButton>
       )}
       <Link to="/">
         <img
-          className="header__logo"
+          className={styles.header__logo}
           src="https://logos-world.net/wp-content/uploads/2020/09/Tinder-Logo.png"
           alt="tinder logo"
         />
       </Link>
       <Link to="/chat">
         <IconButton>
-          <ForumIcon className="header__icon" fontSize="large" />
+          <ForumIcon className={styles.header__icon} fontSize="large" />
         </IconButton>
       </Link>
     </div>
