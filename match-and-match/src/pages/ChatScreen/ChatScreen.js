@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Avatar from '@mui/material/Avatar';
-import "./ChatScreen.css";
+import styles from "./ChatScreen.module.css";
 
 const ChatScreen = () => {
   const [input, setInput] = useState("");
@@ -28,29 +28,29 @@ const ChatScreen = () => {
     setInput("");
   };
   return (
-    <div className="chatScreen">
-      <p className="chatScreen__timestamp">
+    <div className={styles.chatScreen}>
+      <p className={styles.chatScreen__timestamp}>
         YOU MATCHED WITH LABRADOR ON 08/21/2020
       </p>
       {messages.map((message) =>
         message.name ? (
-          <div className="chatScreen__message">
+          <div className={styles.chatScreen__message}>
             <Avatar
-              className="chatScreen__image"
+              className={styles.chatScreen__image}
               alt={message.name}
               src={message.image}
             />
-            <p className="chatScreen__text">{message.message}</p>
+            <p className={styles.chatScreen__text}>{message.message}</p>
           </div>
         ) : (
-          <div className="chatScreen__message">
-            <p className="chatScreen__owntext">{message.message}</p>
+          <div className={styles.chatScreen__message}>
+            <p className={styles.chatScreen__owntext}>{message.message}</p>
           </div>
         )
       )}
-      <form className="chatScreen__form">
+      <form className={styles.chatScreen__form}>
         <input
-          className="chatScreen__input"
+          className={styles.chatScreen__input}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -58,7 +58,7 @@ const ChatScreen = () => {
         <button
           onClick={handleSend}
           type="submit"
-          className="chatScreen__button"
+          className={styles.chatScreen__button}
         >
           SEND
         </button>

@@ -1,19 +1,18 @@
 import React from "react";
-import "./Chat.css";
-import Avatar from '@mui/material/Avatar';
 import { Link } from "react-router-dom";
-
+import Avatar from "@mui/material/Avatar";
+import styles from "./Chat.module.css";
 
 const Chat = ({ name, message, profilePic, timestamp }) => {
   return (
     <Link to={`/chat/${name}`}>
-      <div className="chat">
-        <Avatar className="chat__image" src={profilePic} />
-        <div className="chat__details">
+      <div className={styles.chat}>
+        <Avatar className={styles.chat__image} src={profilePic} />
+        <div className={styles.chat__details}>
           <h2>{name}</h2>
           <p>{message}</p>
         </div>
-        <p className="chat__timestamp">{timestamp}</p>
+        <p className={styles.chat__timestamp}>{timestamp}</p>
       </div>
     </Link>
   );
