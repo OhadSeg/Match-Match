@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Avatar from '@mui/material/Avatar';
+import Avatar from "@mui/material/Avatar";
 import styles from "./ChatScreen.module.css";
+import { Link } from "react-router-dom";
 
 const ChatScreen = () => {
   const [input, setInput] = useState("");
@@ -32,6 +33,11 @@ const ChatScreen = () => {
       <p className={styles.chatScreen__timestamp}>
         YOU MATCHED WITH LABRADOR ON 08/21/2020
       </p>
+    <div className={styles.buttonContainer}>
+    <Link to="/game" className={styles.link}>
+      <button className={styles.match_button}>Match Date</button>
+    </Link>
+  </div>
       {messages.map((message) =>
         message.name ? (
           <div className={styles.chatScreen__message}>
