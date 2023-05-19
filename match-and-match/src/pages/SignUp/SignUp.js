@@ -1,10 +1,11 @@
-import React, { useState, useReducer, useRef,useEffect } from 'react';
+import React, { useState, useReducer, useRef,useEffect,useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Card from '../../components/UI/Card/Card';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import classes from './SignUp.module.css';
+import AuthContext from '../../store/auth-context';
 
 const emailReducer = (state, action) => {
   if (action.type === 'USER_INPUT') {
@@ -36,7 +37,10 @@ const textReducer = (state, action) => {
     return { value: '', isValid: false };
   };
 
+
 const SignUp = (props) => {
+const authCtx = useContext(AuthContext);
+
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [firstNameState, dispatchFirstName] = useReducer(textReducer, {
@@ -64,7 +68,7 @@ const SignUp = (props) => {
   const passwordInputRef = useRef();
 
 
-  const { isValid: firstNameIsValid } = firstNameState;
+  const { isValid: firstNameIsValid } = firstNameState; 
   const { isValid: lastNameIsValid } = lastNameState;
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
@@ -121,7 +125,13 @@ const SignUp = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (formIsValid) {
-      // Perform form submission logic
+      const user = {
+        email:emailState.value ,
+        password:passwordState.value,
+        fName:firstNameState.value,
+        lName: lastNameState.value,
+      }
+      authCtx.onSignUp(user);
       navigate('/');
     } else {
       if (!firstNameIsValid) {
@@ -180,7 +190,7 @@ const SignUp = (props) => {
           onBlur={validatePasswordHandler}
         />
         <div className={classes.actions}>
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit" className={classes.btn}>Sign Up</Button>
           <Link to="/">Already have an account? Login</Link>
         </div>
       </form>
