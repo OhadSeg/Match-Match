@@ -118,7 +118,7 @@ const Login = (props) => {
           onChange={emailChangeHandler}
           onBlur={validateEmailHandler}
         />
-        < Input
+        <Input
           ref={passwordInputRef}
           id="password"
           label="Password"
