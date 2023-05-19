@@ -5,7 +5,15 @@ function RootLayout() {
   const { pathname } = useLocation();
   let backButtonPath;
   if (pathname !== "/") {
-    backButtonPath = pathname.includes("/chat/") ? "/chat" : "/";
+    if(pathname.includes("/chat/")) {
+       backButtonPath= "/chat"
+    } 
+    else if (pathname.includes("/game")) {
+      //Need to find a way to know which chat led you to this game,
+      //so the return button will return you to the right chatscreen and not to the chats
+      backButtonPath= "/chat/"
+    }
+    else { backButtonPath= "/" } 
   }
   return (
     <>
