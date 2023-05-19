@@ -103,7 +103,6 @@ const Login = (props) => {
     }
   };
 
-  // const loginButtonPath = authCtx.isLoggedIn ? "/home" : "/";
 
   return (
     <Card className={classes.login}>

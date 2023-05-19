@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthContext from './store/auth-context';
 import { useContext } from "react";
 import SignUp from "./pages/SignUp/SignUp";
+import Game from "./components/tic-tac-toe/Game/Game"
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -23,7 +24,8 @@ function App() {
         { path: '/', element: toRender},
         { path: '/chat', element: <ChatsPage /> },
         { path: '/chat/:person', element: <ChatScreen/>},
-        {path:'/registration', element: <SignUp/>}
+        {path:'/registration', element: <SignUp/>},
+        {path:'/game', element: <Game/>}
       ]
     }
   ]);

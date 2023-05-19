@@ -14,7 +14,7 @@
 .chatScreen__timestamp {
   text-align: center;
   padding: 20px;
-  color: gray;
+  color: rgb(23, 18, 18);
 }
 
 .chatScreen__owntext {
@@ -46,4 +46,24 @@
   background-color: white;
   font-weight: bolder;
   color: #fe3d71;
+}
+
+.match_button {
+  border-radius: 10px;
+  color: #fe3d71;
+  background-color: white;
+  font-weight: bolder;
+  border: none;
+
+
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.link {
+  text-align: center;
 }

@@ -56,8 +56,8 @@ export const AuthContextProvider = (props) => {
     console.log(email);
     console.log(password);
     setIsLoggedIn(true);
-    console.log("*** check if saving signuped user to list users valid ***");
-    console.log(usersData[2].email);
+    // console.log("*** check if saving signuped user to list users valid ***");
+    //console.log(usersData[2].email);
     const userLogged = usersData.find((user) => user.email === email);
     console.log("*** login handler ***");
     console.log(userLogged);
