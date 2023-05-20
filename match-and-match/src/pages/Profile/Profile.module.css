@@ -9,6 +9,7 @@
   .profileHeader {
     text-align: center;
     margin-bottom: 20px;
+    position: relative;
   }
   
   .profileHeader h1 {
@@ -33,11 +34,26 @@
     max-height: 80px;
     margin-bottom: 20px;
   }
+
+  .profileHeader button {
+    background-color: #ff5a5f;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+  }
   
   .profileDetailes {
     border-top: 1px solid #eee;
     padding-top: 16px;
-    margin-top: 16px;
+    margin-top: 40px;
   }
   
   .profileDetailes h2 {
