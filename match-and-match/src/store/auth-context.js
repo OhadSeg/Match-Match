@@ -9,6 +9,7 @@ let usersData = [
     favoriteFood: "pizza",
     musicType: "rap",
     vacationSpot: "madrid",
+    image:"https://scontent.ftlv20-1.fna.fbcdn.net/v/t39.30808-6/245628574_6703347393016523_4021478128689167373_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=PG1amcxiqcYAX-81zqd&_nc_ht=scontent.ftlv20-1.fna&oh=00_AfAxGeaULyLj1dsO-JSs5ZAzI9rTknVuRWE1t-59ZWkHrw&oe=646DEA4B"
     
   },
   {
@@ -20,6 +21,7 @@ let usersData = [
     favoriteFood: "rice",
     musicType: "soul",
     vacationSpot: "paris",
+    image:"https://scontent.ftlv20-1.fna.fbcdn.net/v/t1.18169-9/13254457_1301885369839391_8807267142125626618_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=E99fxR5wv64AX-kTP4h&_nc_ht=scontent.ftlv20-1.fna&oh=00_AfCZOcYtv4JX8D55-SFwhHWlps1lEDpPw7THloPwopYBYQ&oe=64903972",
   },
 ];
 const AuthContext = React.createContext({
@@ -41,6 +43,7 @@ export const AuthContextProvider = (props) => {
     favoriteFood: "",
     musicType: "",
     vacationSpot: "",
+    image:"",
   });
 
   // useEffect(() => {
@@ -83,6 +86,7 @@ export const AuthContextProvider = (props) => {
       favoriteFood: userLogged.favoriteFood,
       musicType: userLogged.musicType,
       vacationSpot: userLogged.vacationSpot,
+      image:userLogged.image,
     });
 
     console.log(loggedInUser);
@@ -104,6 +108,7 @@ export const AuthContextProvider = (props) => {
         onLogout: logoutHandler,
         onLogin: loginHandler,
         onSignUp: signUpHandler,
+        loggedInUser:loggedInUser,
       }}
     >
       {props.children}

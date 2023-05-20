@@ -9,6 +9,7 @@ import AuthContext from './store/auth-context';
 import { useContext } from "react";
 import SignUp from "./pages/SignUp/SignUp";
 import Game from "./components/tic-tac-toe/Game/Game"
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -25,7 +26,8 @@ function App() {
         { path: '/chat', element: <ChatsPage /> },
         { path: '/chat/:person', element: <ChatScreen/>},
         {path:'/registration', element: <SignUp/>},
-        {path:'/game', element: <Game/>}
+        {path:'/game', element: <Game/>},
+        {path:'/profile',element:<Profile/>},
       ]
     }
   ]);
