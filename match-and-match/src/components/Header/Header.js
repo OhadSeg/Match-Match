@@ -24,9 +24,11 @@ function Header({ backButtonPath }) {
           </IconButton>
         </Link> 
       ) : (
+        <Link to={"/profile"}>
         <IconButton>
           <PersonIcon className={styles.header__icon} fontSize="large" />
         </IconButton>
+        </Link>
       ) : null}
       <Link to="/">
         <img
