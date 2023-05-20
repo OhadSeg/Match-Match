@@ -5,12 +5,21 @@ let usersData = [
     password: "idancohen",
     fName: "Idan",
     lName: "Cohen",
+    hobby: "basketball",
+    favoriteFood: "pizza",
+    musicType: "rap",
+    vacationSpot: "madrid",
+    
   },
   {
     email: "eran@gmail.com",
     password: "eranyosfia",
     fName: "Eran",
     lName: "Yosfia",
+    hobby: "math",
+    favoriteFood: "rice",
+    musicType: "soul",
+    vacationSpot: "paris",
   },
 ];
 const AuthContext = React.createContext({
@@ -28,6 +37,10 @@ export const AuthContextProvider = (props) => {
     password: "",
     fName: "",
     lName: "",
+    hobby: "",
+    favoriteFood: "",
+    musicType: "",
+    vacationSpot: "",
   });
 
   // useEffect(() => {
@@ -66,6 +79,10 @@ export const AuthContextProvider = (props) => {
       password: userLogged.password,
       fName: userLogged.fName,
       lName: userLogged.lName,
+      hobby: userLogged.hobby,
+      favoriteFood: userLogged.favoriteFood,
+      musicType: userLogged.musicType,
+      vacationSpot: userLogged.vacationSpot,
     });
 
     console.log(loggedInUser);

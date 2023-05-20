@@ -1,10 +1,36 @@
-.signUp {
-    width: 90%;
-    max-width: 40rem;
-    margin: 2rem auto;
-    padding: 2rem;
-  }
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   
-  .actions {
-    text-align: center;
-  }
+  /* ...rest of the CSS code */
+}
+
+.signupForm {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.signupForm > * {
+  flex: 0 0 45%;
+  margin: 10px;
+}
+
+.signupForm input::placeholder {
+  padding: 8px;
+}
+
+.signupForm label {
+  width: 100%;
+  margin-bottom: 5px;
+  max-width: 50rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
