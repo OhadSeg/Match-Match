@@ -31,9 +31,8 @@ function Header({ backButtonPath }) {
         </Link>
       ) : null}
       <Link to="/">
-        <img
-          className={styles.header__logo}
-          src="https://logos-world.net/wp-content/uploads/2020/09/Tinder-Logo.png"
+        <img className={styles.header__logo}
+          src="/img/match-match-logo.png"
           alt="tinder logo"
         />
       </Link>

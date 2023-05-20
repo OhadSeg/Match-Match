@@ -37,6 +37,9 @@ const ChatScreen = () => {
     <Link to="/game" className={styles.link}>
       <button className={styles.match_button}>Match Date</button>
     </Link>
+    <Link to={"/trivia"}>
+    <button className={styles.match_button}>Trivia</button>
+    </Link>
   </div>
       {messages.map((message) =>
         message.name ? (

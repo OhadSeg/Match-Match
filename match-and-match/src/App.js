@@ -10,6 +10,7 @@ import { useContext } from "react";
 import SignUp from "./pages/SignUp/SignUp";
 import Game from "./components/tic-tac-toe/Game/Game"
 import Profile from "./pages/Profile/Profile";
+import Trivia from "./pages/Trivia/Trivia";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -28,6 +29,7 @@ function App() {
         {path:'/registration', element: <SignUp/>},
         {path:'/game', element: <Game/>},
         {path:'/profile',element:<Profile/>},
+        {path:'/trivia',element:<Trivia/>}
       ]
     }
   ]);
