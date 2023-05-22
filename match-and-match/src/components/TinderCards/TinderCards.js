@@ -10,7 +10,7 @@ const db = [
   {
     name: 'Erlich Bachman',
     url: './img/erlich.jpg'
-  },
+  },  
   {
     name: 'Monica Hall',
     url: './img/monica.jpg'
@@ -22,7 +22,20 @@ const db = [
   {
     name: 'Dinesh Chugtai',
     url: './img/dinesh.jpg'
+  },
+  {
+    name: 'Ohad Segal',
+    url:'./img/ohad.jpg'
+  },
+  {
+    name: 'Eran Yosefia',
+    url:'./img/idan.jpg'
+  },
+  {
+    name: 'Idan Cohen',
+    url:'./img/eran.jpg'
   }
+
 ]
 
 const TinderCards = () => {
