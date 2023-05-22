@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import styles from "./ChatScreen.module.css";
 import { Link } from "react-router-dom";
+import idanImage from "../../assets/img/idan.jpg"
+
+//need to check why the image only working when importing in this case
 
 const ChatScreen = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
     {
-      name: "Labrador",
-      image:
-        "https://gooddoggies.online/wp-content/uploads/2020/06/5-Tips-To-Training-A-Labrador-Puppy-1.jpg",
+      name: "Idan",
+      image:idanImage,
       message: "Hey",
     },
     {
-      name: "Labrador",
-      image:
-        "https://gooddoggies.online/wp-content/uploads/2020/06/5-Tips-To-Training-A-Labrador-Puppy-1.jpg",
-      message: "Bork bork bork",
+      name: "Idan",
+      image:idanImage,
+      message: "How are you ?",
     },
     {
       message: "yo",
@@ -31,7 +32,7 @@ const ChatScreen = () => {
   return (
     <div className={styles.chatScreen}>
       <p className={styles.chatScreen__timestamp}>
-        YOU MATCHED WITH LABRADOR ON 08/21/2020
+        YOU MATCHED WITH IDAN ON 08/21/2020
       </p>
     <div className={styles.buttonContainer}>
     <Link to="/game" className={styles.link}>

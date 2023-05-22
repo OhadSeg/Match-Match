@@ -3,7 +3,6 @@
     overflow: hidden;
     width: 100vw;
     min-height: 100vh;
-
 }
 
 @media (prefers-reduced-motion: no-preference) {

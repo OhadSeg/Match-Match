@@ -17,7 +17,8 @@ a {
 }
 
 .chat__details p {
-    color: gray;
+    color: rgb(246, 235, 235);
+    font-weight: bold;
 }
 
 .chat__image {
