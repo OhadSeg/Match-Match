@@ -1,8 +1,8 @@
 #root {
-    background: linear-gradient(#e66465, #9198e5);
-    overflow: hidden;
-    width: 100vw;
-    min-height: 100vh;
+  background: #132b41;
+  overflow: hidden;
+  width: 100vw;
+  min-height: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -16,6 +16,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
