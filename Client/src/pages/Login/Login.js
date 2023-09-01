@@ -10,8 +10,9 @@ import {  Link, useNavigate  } from "react-router-dom";
 import Card from '../../components/UI/Card/Card';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
-import AuthContext from '../../store/auth-context';
+import { UsersContext } from "../../store/usersContext";
 import classes from './Login.module.css';
+import instance from "../../rest-utils"
 
 const emailReducer = (state, action) => {
   if (action.type === 'USER_INPUT') {
@@ -45,7 +46,7 @@ const Login = (props) => {
     isValid: null,
   });
 
-  const authCtx = useContext(AuthContext);
+  const { setIsLoggedIn, setToken } = useContext(UsersContext)
   const navigate = useNavigate();
 
   const emailInputRef = useRef();
@@ -90,11 +91,24 @@ const Login = (props) => {
     dispatchPassword({ type: 'INPUT_BLUR' });
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     if (formIsValid) {
-      authCtx.onLogin(emailState.value, passwordState.value);
-      navigate("/");
+      const user = {
+      email: emailState.value,
+      password: passwordState.value
+      }
+      const resp = await instance.post('users/login', user)
+        if(resp.status === 200){
+          const token = resp.data.accessToken
+          window.localStorage.setItem('token',token)
+          setToken(token)
+          setIsLoggedIn(true)
+          navigate("/");
+        }
+        else{
+          alert("You entered wrong details")
+        }      
 
     } else if (!emailIsValid) {
       emailInputRef.current.focus();
@@ -102,7 +116,6 @@ const Login = (props) => {
       passwordInputRef.current.focus();
     }
   };
-
 
   return (
     <Card className={classes.login}>

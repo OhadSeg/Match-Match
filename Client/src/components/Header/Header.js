@@ -5,19 +5,19 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link } from "react-router-dom";
 import AuthContext from '../../store/auth-context'
-import { useContext } from "react";
+import { UsersContext } from "../../store/usersContext";
+import { useContext, useEffect, useState } from "react";
 
 function Header({ backButtonPath }) {
-  const authCtx = useContext(AuthContext);
-  console.log(authCtx.isLoggedIn)
+  const { isLoggedIn } = useContext(UsersContext)
   const headerClasses = [styles.header];
 
-  if (authCtx.isLoggedIn) {
+  if (isLoggedIn) {
     headerClasses.push(styles.loggedIn);
   }
   return (
     <div className={headerClasses.join(' ')}>
-      {authCtx.isLoggedIn ? backButtonPath ? (
+      {isLoggedIn ? backButtonPath ? (
         <Link to={backButtonPath}>
           <IconButton>
             <ArrowBackIosIcon className={styles.header__icon} fontSize="large" />
@@ -36,7 +36,7 @@ function Header({ backButtonPath }) {
           alt="tinder logo"
         />
       </Link>
-      {authCtx.isLoggedIn && <Link to="/chat">
+      {isLoggedIn && <Link to="/chat">
         <IconButton>
           <ForumIcon className={styles.header__icon} fontSize="large" />
         </IconButton>

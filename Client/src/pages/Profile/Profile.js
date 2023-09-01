@@ -1,43 +1,67 @@
-import React from 'react';
-import classes from './Profile.module.css' // CSS file for styling
-import AuthContext from "../../store/auth-context";
+import React, { useEffect, useState } from 'react';
+import classes from './Profile.module.css'
+import { UsersContext } from "../../store/usersContext";
 import {useContext} from "react";
 import {  useNavigate  } from "react-router-dom";
+import instance from "../../rest-utils"
 
 const Profile = () => {
-    const authCtx = useContext(AuthContext);
+    const { setIsLoggedIn, token, setToken } = useContext(UsersContext)
     const navigate= useNavigate();
-    const { email,fName, lName, hobby, favoriteFood, musicType, vacationSpot, image } = authCtx.loggedInUser;
-    console.log(authCtx.loggedInUser);
+    const [user, setUser] = useState({});
+
+
+    useEffect(() => {
+        const token2 = token || window.localStorage.getItem('token')
+        setToken(token2)
+        instance.get('/users/getUserDetails',{
+            headers:
+                {"Authorization" : `Bearer ${token2}` }
+        }).then((resp) => {
+            setUser(resp.data)
+        })
+    },[])
+    
     const logoutHandler = (event) => {
         event.preventDefault();
-        authCtx.onLogout();
-        console.log("check if user loggedout on back")
-        console.log(authCtx.loggedInUser);
-        navigate("/");
+        setIsLoggedIn(false)
+        window.localStorage.removeItem('token')
+        navigate('/');     
       };
     return (
         <div className={classes.profileContainer}>
             <div className={classes.profileHeader}>
-                <h1>{fName} {lName}</h1>
-                <p>{email}</p>
-                <img src={image} alt='userImage'></img>
+                <h1>{user.fname} {user.lname}</h1>
+                <p>{user.email}</p>
+                <img src={user.myPic} alt='userImage'></img>
                 <button onClick={logoutHandler}>Logout</button>
 
             </div>
             <div className={classes.profileDetailes}>
                 <h2>About Me</h2>
                 <div>
-                    <strong>Hobby:</strong> {hobby}
+                    <strong>Age:</strong> {user.age}
                 </div>
                 <div>
-                    <strong>Favorite Food:</strong> {favoriteFood}
+                    <strong>Gender:</strong> {user.gender}
                 </div>
                 <div>
-                    <strong>Favorite Music:</strong> {musicType}
+                    <strong>Residence:</strong> {user.residence}
                 </div>
                 <div>
-                    <strong>Favorite Location Spot:</strong> {vacationSpot}
+                    <strong>Hobby:</strong> {user.hobby}
+                </div>
+                <div>
+                    <strong>Favorite Food:</strong> {user.favorite_food}
+                </div>
+                <div>
+                    <strong>Favorite Music:</strong> {user.favorite_music}
+                </div>
+                <div>
+                    <strong>Favorite Location Spot:</strong> {user.favorite_vacation_spot}
+                </div>
+                <div>
+                    <strong>Interested in:</strong> {user.interested_in}
                 </div>
             </div>
         </div>

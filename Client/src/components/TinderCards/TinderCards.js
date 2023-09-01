@@ -1,48 +1,64 @@
-import React, { useState, useMemo, useRef } from 'react'
+import React, { useState, useMemo, useRef, useEffect, useContext } from 'react'
 import TinderCard from 'react-tinder-card'
 import styles from './TinderCards.module.css'
+import instance from "../../rest-utils"
+import { UsersContext } from "../../store/usersContext";
 
 const db = [
   {
     name: 'Richard Hendricks',
-    url: './img/richard.jpg'
+    myPic: './img/richard.jpg'
   },
   {
     name: 'Erlich Bachman',
-    url: './img/erlich.jpg'
+    myPic: './img/erlich.jpg'
   },  
   {
     name: 'Monica Hall',
-    url: './img/monica.jpg'
+    myPic: './img/monica.jpg'
   },
   {
     name: 'Jared Dunn',
-    url: './img/jared.jpg'
+    myPic: './img/jared.jpg'
   },
   {
     name: 'Dinesh Chugtai',
-    url: './img/dinesh.jpg'
+    myPic: './img/dinesh.jpg'
   },
   {
     name: 'Ohad Segal',
-    url:'./img/ohad.jpg'
+    myPic:'./img/ohad.jpg'
   },
   {
     name: 'Eran Yosefia',
-    url:'./img/idan.jpg'
+    myPic:'./img/idan.jpg'
   },
   {
     name: 'Idan Cohen',
-    url:'./img/eran.jpg'
+    myPic:'./img/eran.jpg'
   }
 
 ]
 
 const TinderCards = () => {
-    const [currentIndex, setCurrentIndex] = useState(db.length - 1)
+  const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
-  // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
+  const { token, setToken } = useContext(UsersContext)
+
+
+  useEffect(() => {
+    const token2 = token || window.localStorage.getItem('token')
+    setToken(token2)
+    instance.get('/users/getUsers',{
+      headers:
+          {"Authorization" : `Bearer ${token2}` }
+  }).then((resp) => {
+      console.log(resp.data)
+      db.push(...resp.data)
+      setCurrentIndex(db.length - 1)
+  })
+},[])
 
   const childRefs = useMemo(
     () =>
@@ -110,7 +126,7 @@ const TinderCards = () => {
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <div
-              style={{ backgroundImage: 'url(' + character.url + ')' }}
+              style={{ backgroundImage: 'url(' + character.myPic + ')' }}
               className={styles.card}
             >
               <h3>{character.name}</h3>

@@ -1,20 +1,21 @@
 .header {
-    display:flex;
-    justify-content: center;
-    border-bottom: 1px solid #e66465;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loggedIn {
-    justify-content: space-between;
-  }
+  justify-content: space-between;
+}
 
 .header__logo {
-  height: 120px; /* Increase the height to make the logo larger */
-  width: auto; /* Let the width adjust automatically */
+  height: 120px;
+  /* Increase the height to make the logo larger */
+  width: auto;
+  /* Let the width adjust automatically */
   object-fit: contain;
 }
 
 .header__icon {
-    padding:20px;
+  padding: 20px;
 }

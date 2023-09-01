@@ -6,12 +6,13 @@ import React, {
   useContext,
 } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import avatar from './profile.png'
 import Card from "../../components/UI/Card/Card";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import classes from "./SignUp.module.css";
 import AuthContext from "../../store/auth-context";
+import instance from "../../rest-utils"
 
 const emailReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
@@ -80,6 +81,25 @@ const SignUp = (props) => {
     value: "",
     isValid: null,
   });
+  const [ageState, dispatchAge] = useReducer(textReducer, {
+    value: "",
+    isValid: null,
+  });
+  const [genderState, dispatchGender] = useReducer(textReducer, {
+    value: "",
+    isValid: null,
+  });
+  const [residenceState, dispatchResidence] = useReducer(textReducer, {
+    value: "",
+    isValid: null,
+  });
+  const [interested_inState, dispatchInterested_in] = useReducer(textReducer, {
+    value: "",
+    isValid: null,
+  });
+
+  const [postImage, setPostImage] = useState("")
+
 
   const navigate = useNavigate();
 
@@ -96,7 +116,10 @@ const SignUp = (props) => {
   const { isValid: favoriteFoodStateIsValid } = musicTypeState;
   const { isValid: musicTypeStateIsValid } = passwordState;
   const { isValid: vacationSpotStateIsValid } = vacationSpotState;
-
+  const { isValid: ageIsValid } = ageState;
+  const { isValid: genderIsValid } = genderState;
+  const { isValid: residenceIsValid } = residenceState;
+  const { isValid: interested_inIsValid } = interested_inState;
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -109,7 +132,11 @@ const SignUp = (props) => {
         hobbyStateIsValid &&
         favoriteFoodStateIsValid &&
         musicTypeStateIsValid &&
-        vacationSpotStateIsValid
+        vacationSpotStateIsValid &&
+        ageIsValid &&
+        genderIsValid &&
+        residenceIsValid &&
+        interested_inIsValid
       );      
     }, 500);
 
@@ -117,7 +144,9 @@ const SignUp = (props) => {
       console.log("CLEANUP");
       clearTimeout(identifier);
     };
-  }, [firstNameIsValid, lastNameIsValid, emailIsValid, passwordIsValid, hobbyStateIsValid, favoriteFoodStateIsValid, musicTypeStateIsValid, vacationSpotStateIsValid]);
+  }, [firstNameIsValid, lastNameIsValid, emailIsValid, passwordIsValid, hobbyStateIsValid,
+    favoriteFoodStateIsValid, musicTypeStateIsValid, vacationSpotStateIsValid, ageIsValid, genderIsValid,
+    residenceIsValid, interested_inIsValid]);
 
   const firstNameChangeHandler = (event) => {
     dispatchFirstName({ type: "USER_INPUT", val: event.target.value });
@@ -150,20 +179,33 @@ const SignUp = (props) => {
   const validatePasswordHandler = () => {
     dispatchPassword({ type: "INPUT_BLUR" });
   };
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    const base64 = await convertToBase64(file)
+    console.log(base64)
+    setPostImage(base64)
+  }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     if (formIsValid) {
       const user = {
-        email: emailState.value,
+        // _id: '',
+        fname: firstNameState.value,
+        lname: lastNameState.value,
         password: passwordState.value,
-        fName: firstNameState.value,
-        lName: lastNameState.value,
+        email: emailState.value,
+        age: ageState.value,
+        gender: genderState.value,
+        residence: residenceState.value,
         hobby: hobbyState.value,
-        favoriteFood: favoriteFoodState.value,
-        musicType: musicTypeState.value,
-        vacationSpot: vacationSpotState.value,
+        favorite_food: favoriteFoodState.value,
+        favorite_music: musicTypeState.value,
+        favorite_vacation_spot: vacationSpotState.value,
+        interested_in: interested_inState.value,
+        myPic: postImage
       };
+      const resp = await instance.post('users/registration', user)
       authCtx.onSignUp(user);
       navigate("/");
     } else {
@@ -222,6 +264,39 @@ const SignUp = (props) => {
           onChange={passwordChangeHandler}
           onBlur={validatePasswordHandler}
         />
+         <Input
+          id="age"
+          label="Age"
+          type="text"
+          isValid={ageState.isValid}
+          value={ageState.value}
+          onChange={(event) =>
+            dispatchAge({ type: "USER_INPUT", val: event.target.value })
+          }
+          onBlur={() => dispatchAge({ type: "INPUT_BLUR" })}
+        />
+        <Input
+          id="gender"
+          label="Gender"
+          type="text"
+          isValid={genderState.isValid}
+          value={genderState.value}
+          onChange={(event) =>
+            dispatchGender({ type: "USER_INPUT", val: event.target.value })
+          }
+          onBlur={() => dispatchGender({ type: "INPUT_BLUR" })}
+        />
+        <Input
+          id="residence"
+          label="Residence"
+          type="text"
+          isValid={residenceState.isValid}
+          value={residenceState.value}
+          onChange={(event) =>
+            dispatchResidence({ type: "USER_INPUT", val: event.target.value })
+          }
+          onBlur={() => dispatchResidence({ type: "INPUT_BLUR" })}
+        />
         <Input
           id="hobby"
           label="Hobby"
@@ -233,7 +308,6 @@ const SignUp = (props) => {
           }
           onBlur={() => dispatchHobby({ type: "INPUT_BLUR" })}
         />
-
         <Input
           id="favoriteFood"
           label="Favorite Food"
@@ -248,7 +322,6 @@ const SignUp = (props) => {
           }
           onBlur={() => dispatchFavoriteFood({ type: "INPUT_BLUR" })}
         />
-
         <Input
           id="musicType"
           label="Type of Music You Love"
@@ -260,7 +333,6 @@ const SignUp = (props) => {
           }
           onBlur={() => dispatchMusicType({ type: "INPUT_BLUR" })}
         />
-
         <Input
           id="vacationSpot"
           label="Favorite Vacation Spot"
@@ -275,7 +347,30 @@ const SignUp = (props) => {
           }
           onBlur={() => dispatchVacationSpot({ type: "INPUT_BLUR" })}
         />
+        <Input
+          id="interested_in"
+          label="Who you interested in?"
+          type="text"
+          isValid={interested_inState.isValid}
+          value={interested_inState.value}
+          onChange={(event) =>
+            dispatchInterested_in({ type: "USER_INPUT", val: event.target.value })
+          }
+          onBlur={() => dispatchInterested_in({ type: "INPUT_BLUR" })}
+        />
 
+        <label htmlFor="file-upload" className='custom-file-upload'>
+          <img src={postImage || avatar} alt="" />
+        </label>
+
+        <input
+          type="file"
+          lable="Image"
+          name="myFile"
+          id='file-upload'
+          accept= '.jpeg, .png, .jpg'
+          onChange={(e) => handleFileUpload(e)}
+        />
         <div className={classes.actions}>
           <Button type="submit">Sign Up</Button>
           <Link to="/">Already have an account? Login</Link>
@@ -286,3 +381,17 @@ const SignUp = (props) => {
 };
 
 export default SignUp;
+
+
+function convertToBase64(file){
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result)
+    };
+    fileReader.onerror = (error) => {
+      reject(error)
+    }
+  })
+}
