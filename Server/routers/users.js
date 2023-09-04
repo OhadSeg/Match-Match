@@ -42,6 +42,16 @@ router.get('/getUserDetails', authenticateToken, async (req,res) => {
     return res.json(user)
 })
 
+router.post('/like', authenticateToken, async (req, res) => {
+    const ifMatch = await usersBL.likeAndIfMatch(req.user.email, req.body.email)
+    return res.json(ifMatch)
+})
+
+router.get('/getAllMatches', authenticateToken, async (req, res) => {
+    const users = await usersBL.getAllMatches(req.user.email)
+    return res.json(users)
+})
+
 function authenticateToken(req, res, next){
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]

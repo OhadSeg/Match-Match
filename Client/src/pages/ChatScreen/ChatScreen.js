@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import styles from "./ChatScreen.module.css";
-import { Link } from "react-router-dom";
-import idanImage from "../../assets/img/idan.jpg"
-
-//need to check why the image only working when importing in this case
+import { Link, useLocation } from "react-router-dom";
 
 const ChatScreen = () => {
   const [input, setInput] = useState("");
+  let { state } = useLocation();
   const [messages, setMessages] = useState([
     {
-      name: "Idan",
-      image:idanImage,
+      name: state.name,
+      image:state.pic,
       message: "Hey",
     },
     {
-      name: "Idan",
-      image:idanImage,
+      name: state.name,
+      image:state.pic,
       message: "How are you ?",
     },
     {
@@ -32,7 +30,7 @@ const ChatScreen = () => {
   return (
     <div className={styles.chatScreen}>
       <p className={styles.chatScreen__timestamp}>
-        YOU MATCHED WITH IDAN ON 08/21/2020
+        YOU MATCHED WITH {state.name} ON 08/21/2020
       </p>
     <div className={styles.buttonContainer}>
     <Link to="/game" className={styles.link}>
@@ -45,9 +43,9 @@ const ChatScreen = () => {
     <button className={styles.match_button}>ChatBot Assist</button>
     </Link>
   </div>
-      {messages.map((message) =>
+      {messages.map((message, index) =>
         message.name ? (
-          <div className={styles.chatScreen__message}>
+          <div className={styles.chatScreen__message} key={index}>
             <Avatar
               className={styles.chatScreen__image}
               alt={message.name}
@@ -56,7 +54,7 @@ const ChatScreen = () => {
             <p className={styles.chatScreen__text}>{message.message}</p>
           </div>
         ) : (
-          <div className={styles.chatScreen__message}>
+          <div className={styles.chatScreen__message} key={index}>
             <p className={styles.chatScreen__owntext}>{message.message}</p>
           </div>
         )

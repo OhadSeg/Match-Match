@@ -1,82 +1,91 @@
 .profileContainer {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    margin: 0 auto;
-    max-width: 600px;
-  }
-  .profileHeader {
-    text-align: center;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  .profileHeader h1 {
-    font-size: 24px;
-    margin: 15px 0;
-    color: #ff5a5f;
-  }
-  
-  .profileHeader p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 15px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: large;
-  }
-  
-  .profileHeader img {
-    border-radius: 50%;
-    width: auto;
-    height: auto;
-    max-width: 80px;
-    max-height: 80px;
-    margin-bottom: 20px;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-color: #76b0ff;
+  border-color: #e7f5ff;
+  border: 10px solid #F0F0F0;
+  /* Add a thick white border */
+}
 
-  .profileHeader button {
-    background-color: #ff5a5f;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-weight: bold;
-  }
-  
-  .profileDetailes {
-    border-top: 1px solid #eee;
-    padding-top: 16px;
-    margin-top: 40px;
-  }
-  
-  .profileDetailes h2 {
-    font-size: 20px;
-    margin: 0 0 12px;
-    color: #ff5a5f;
-    font-family: "Arial", sans-serif;
-  }
-  
-  .profileDetailes div {
-    margin-bottom: 8px;
-  }
-  
-  .profileDetailes strong {
-    font-weight: bold;
-    color: #ff5a5f;
-    font-family: "Arial", sans-serif;
-  }
-  .profileHeader img {
-    border-radius: 50%;
-    width: auto;
-    height: auto;
-    max-width: 140px;
-    max-height: 140px;
-  }
-  
+
+/* Rest of your styles */
+
+
+.profileHeader {
+  text-align: center;
+  padding: 20px;
+}
+
+.profileHeader h1 {
+  font-size: 24px;
+  margin: 0;
+  color: darkslateblue;
+}
+
+.profileHeader p {
+  color: #132b41;
+  margin: 5px 0;
+}
+
+.profileHeader img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: 10px;
+  border: 5px solid #F0F0F0;
+  /* Tinder red */
+  background-color: #f6dbfc;
+}
+
+.profileContainer button {
+  background-color: #f44336;
+  /* Tinder red */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.profileContainer button:hover {
+  background-color: darkred;
+  /* Slightly darker red on hover */
+}
+
+.profileDetailes h2 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.profileDetailes div {
+  margin: 10px 0;
+}
+
+.profileDetailes strong {
+  color: darkslateblue;
+  /* Tinder red */
+  margin-right: 5px;
+}
+
+
+.profileDetailes div {
+  margin: 10px 10px 10px 10px;
+  padding: 10px;
+  border: 3px solid #F0F0F0;
+  /* Add a white border */
+  display: inline-block;
+  /* Make the divs inline-block to fit content */
+  border-radius: 10px;
+  /* Add round corners */
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Add a subtle white background color */
+  font-weight: bold;
+}

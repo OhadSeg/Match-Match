@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UsersContext } from "../../store/usersContext";
 import "./Chats.css";
 import Chat from '../../components/Chat/Chat'
+import instance from "../../rest-utils"
 
 const ChatsPage = () => {
+
+  const [matchedUsers, setMatchedUsers] = useState([])
+  const { token, setToken } = useContext(UsersContext) 
+
+  useEffect(() => {
+    const token2 = token || window.localStorage.getItem('token')
+    setToken(token2)
+    instance.get('/users/getAllMatches',{
+      headers:
+          {"Authorization" : `Bearer ${token2}` }
+  }).then((resp) => {
+    setMatchedUsers(resp.data)
+  })
+},[])
+
+
   return <div className="chats">
-      <Chat
-      name="Idan cohen"
-      message="Hasta La vista baby" 
-      timestamp="6 mins ago" 
-      profilePic="./img/idan.jpg"
-      />
-      <Chat
-      name="Eran Yosefia"
-      message="Hola Miamor" 
-      timestamp="1 hr ago" 
-      profilePic="./img/eran.jpg"/>
-      <Chat
-      name="Ohad"
-      message="How You Doin' ?" 
-      timestamp="4 hrs ago" 
-      profilePic="./img/ohad.jpg"/>
+      {matchedUsers.map((user, index) => (
+        <Chat
+        key = {index}
+        name={user.name}
+        message="Hasta La vista baby" 
+        timestamp="6 mins ago" 
+        profilePic={user.myPic}
+        />
+      ))}
   </div>;
 };
 

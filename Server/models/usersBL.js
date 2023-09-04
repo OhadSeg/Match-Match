@@ -9,8 +9,8 @@ const getUsers = async function(userEmail)
     currUser = await getUser(userEmail)
     //const users = await userModel.find({gender: currUser.interested_in, interested_in: currUser.gender})
     const users = await userModel.find({})
-    const usersWithoutCurr = users.filter(user => user._id != currUser._id);
-    selectedKeys = usersWithoutCurr.map(user => {
+    //const usersWithoutCurr = users.filter(user => user._id != currUser._id);
+    selectedKeys = users.map(user => {
         return {"name": user.fname + " " + user.lname, "email": user.email, "myPic": user.myPic}
     })
     return selectedKeys;
@@ -39,4 +39,55 @@ const login = async function(email, password)
     return isValid ? user : null
 }
 
-module.exports = {getUser, getUsers, registration, login}
+const getAllMatches = async function(userEmail)
+{
+    const user = await userModel.findOne({ email: userEmail });
+    const matchedUsersPromises = user.matches.map( async (matchedEmail) => {
+        return await userModel.findOne({ email: matchedEmail });
+    })
+    const matchedUsers = await Promise.all(matchedUsersPromises);
+
+    selectedKeys = matchedUsers.map(user => {
+        return {"name": user.fname + " " + user.lname, "email": user.email, "myPic": user.myPic}
+    })
+    return selectedKeys
+}
+
+const likeAndIfMatch = async function (userEmail, likedUserEmail) {
+    try {
+        // Find the user and likedUser by their emails
+        const user = await userModel.findOne({ email: userEmail });
+        const likedUser = await userModel.findOne({ email: likedUserEmail });
+
+        if (!user || !likedUser) {
+            throw new Error('User or likedUser not found');
+        }
+
+        // Check if the likedUser is not already in the user's liked list
+        if (!user.liked.includes(likedUser.email)) {
+            // Update the likedUser for the user
+            user.liked.push(likedUser.email);
+
+            // Check if there is a match
+            if (likedUser.liked.includes(user.email)) {
+                user.matches.push(likedUser.email);
+                likedUser.matches.push(user.email);
+            }
+
+            // Update both users in the database
+            await userModel.updateOne({ email: userEmail }, user);
+            await userModel.updateOne({ email: likedUserEmail }, likedUser);
+
+            return likedUser.liked.includes(user.email);
+        } else {
+            // If likedUser is already in the liked list, return false (no match)
+            return false;
+        }
+    } catch (error) {
+        // Handle any errors here
+        console.error(error);   
+        throw error;
+    }
+};
+
+module.exports = {getUser, getUsers, registration, login, likeAndIfMatch, getAllMatches}

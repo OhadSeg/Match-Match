@@ -4,8 +4,16 @@ import Avatar from "@mui/material/Avatar";
 import styles from "./Chat.module.css";
 
 const Chat = ({ name, message, profilePic, timestamp }) => {
+  const userDetails = {
+    name: name,
+    pic: profilePic
+  }
   return (
-    <Link to={`/chat/${name}`}>
+    <Link to={{
+      pathname: `/chat/${name}`,
+    }}
+      state= { userDetails }
+    >
       <div className={styles.chat}>
         <Avatar className={styles.chat__image} src={profilePic} />
         <div className={styles.chat__details}>

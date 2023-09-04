@@ -1,11 +1,21 @@
 import React, { useState, useMemo, useRef, useEffect, useContext } from 'react'
+import SwipeButtons from '../SwipeButtons/SwipeButtons';
 import TinderCard from 'react-tinder-card'
 import styles from './TinderCards.module.css'
 import instance from "../../rest-utils"
 import { UsersContext } from "../../store/usersContext";
 
+import buttonsStyles from "../SwipeButtons/SwipeButtons.module.css";
+import ReplayIcon from "@mui/icons-material/Replay";
+import CloseIcon from "@mui/icons-material/Close";
+import StarRateIcon from "@mui/icons-material/StarRate";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FlashOnIcon from "@mui/icons-material/FlashOn";
+import IconButton from "@mui/material/IconButton";
+
 const db = [
   {
+    email: '',
     name: 'Richard Hendricks',
     myPic: './img/richard.jpg'
   },
@@ -41,8 +51,10 @@ const db = [
 ]
 
 const TinderCards = () => {
+  const [db, setDb] = useState([])
   const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
+  const [user, setUser] = useState({});
   const currentIndexRef = useRef(currentIndex)
   const { token, setToken } = useContext(UsersContext)
 
@@ -54,8 +66,8 @@ const TinderCards = () => {
       headers:
           {"Authorization" : `Bearer ${token2}` }
   }).then((resp) => {
-      console.log(resp.data)
-      db.push(...resp.data)
+      setDb(resp.data);
+      // db.push(...resp.data)
       setCurrentIndex(db.length - 1)
   })
 },[])
@@ -72,19 +84,30 @@ const TinderCards = () => {
     setCurrentIndex(val)
     currentIndexRef.current = val
   }
-
   const canGoBack = currentIndex < db.length - 1
 
   const canSwipe = currentIndex >= 0
 
   // set last direction and decrease current index
-  const swiped = (direction, nameToDelete, index) => {
+  const swiped = (direction, name, email, index) => {
     setLastDirection(direction)
     updateCurrentIndex(index - 1)
+    if(direction === 'right'){
+      const token2 = token || window.localStorage.getItem('token')
+      instance.post('/users/like', {email}, {
+        headers:
+            {"Authorization" : `Bearer ${token2}` }
+    }).then((resp) => {
+        if(resp.data === 'true')
+        {
+          console.log("There is match!!")
+          //pop windows with fireworks!! something beautifull and in this window will be a rout to there chat!
+        }
+    })
+    }
   }
 
   const outOfFrame = (name, idx) => {
-    console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current)
     // handle the case in which go back is pressed before card goes outOfFrame
     currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
     // TODO: when quickly swipe and restore multiple times the same card,
@@ -122,7 +145,7 @@ const TinderCards = () => {
             ref={childRefs[index]}
             className={styles.swipe}
             key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name, index)}
+            onSwipe={(dir) => swiped(dir, character.name, character.email, index)}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <div
@@ -148,6 +171,23 @@ const TinderCards = () => {
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
       )}
+      <div className={buttonsStyles.swipeButtons}>
+      <IconButton className={buttonsStyles.swipeButtons__repeat}>
+        <ReplayIcon fontSize="large" />
+      </IconButton>
+      <IconButton className={buttonsStyles.swipeButtons__left}>
+        <CloseIcon fontSize="large" />
+      </IconButton>
+      <IconButton className={buttonsStyles.swipeButtons__star}>
+        <StarRateIcon fontSize="large" />
+      </IconButton>
+      <IconButton className={buttonsStyles.swipeButtons__right} onClick={() => { console.log('onClick'); }}>
+        <FavoriteIcon fontSize="large" />
+      </IconButton>
+      <IconButton className={buttonsStyles.swipeButtons__lightning}>
+        <FlashOnIcon fontSize="large" />
+      </IconButton>
+    </div>
     </div>
   )
 }

@@ -3,24 +3,41 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #eee;
 
   /* ...rest of the CSS code */
 }
 
-.custom-file-upload {
-  margin: auto;
-  border: 1px solid #ccc;
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  cursor: pointer;
+/* Hide the input element visually */
+/* Hide the input element visually */
+.fileUpload {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden;
+  /* Add this line to hide it completely */
 }
 
-.custom-file-upload.img {
-  width: 20px;
-  height: 20px;
+/* Style the label to make it look like a button or container */
+.customFileUpload {
+  display: block;
+  /* Change to block-level to center it horizontally */
+  margin: 0 auto;
+  /* Center it horizontally */
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  /* Center the content horizontally within the container */
+
 }
+
+/* Style the label's content (the image in this case) */
+.profilePic {
+  width: 100px;
+  height: 100px;
+}
+
+
 
 .signupForm {
   display: flex;
@@ -48,4 +65,38 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+}
+
+.gender-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.genderHelper {
+  color: #76b0ff;
+  /* Set the text color to the desired color (#f6dbfc) */
+}
+
+.formContainer {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 100px;
+  /* Increase the border-radius value */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  /* Increase the shadow */
+  background-color: #76b0ff;
+  border: 10px solid #F0F0F0
 }
