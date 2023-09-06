@@ -1,10 +1,11 @@
 const express = require('express')
 const assistantAIBL = require('../models/assistantAIBL')
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get('/getRestaurant',async (req,res) => {
-    const data = await assistantAIBL.getRestAnswer(req.query.id_user1, req.query.id_user2);
+router.get('/getPlaylist', auth, async (req,res) => {
+    const data = await assistantAIBL.createPlaylist(req.user.email, req.query.email);
     return res.json(data)
 })
 

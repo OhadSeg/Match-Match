@@ -25,6 +25,7 @@ const ChatsPage = () => {
       {matchedUsers.map((user, index) => (
         <Chat
         key = {index}
+        email= {user.email}
         name={user.name}
         message="Hasta La vista baby" 
         timestamp="6 mins ago" 

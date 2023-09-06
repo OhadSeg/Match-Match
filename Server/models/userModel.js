@@ -13,6 +13,9 @@ let UserSchema = new mongoose.Schema({
     matches : [String],
     favorite_food : String,
     favorite_music : String,
+    songs : String,
+    book : String,
+    movies : String,
     favorite_vacation_spot : String,
     interested_in : String,
     myPic : String

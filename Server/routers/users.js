@@ -1,10 +1,11 @@
 const express = require('express')
 const usersBL = require('../models/usersBL');
 const jwt = require('jsonwebtoken')
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get('/getUsers', authenticateToken,async (req,res) => {
+router.get('/getUsers', auth, async (req,res) => {
     const users = await usersBL.getUsers(req.user.email)
     return res.json(users)
 })
@@ -37,33 +38,33 @@ router.post('/login', async (req,res) => {
     }
 })
 
-router.get('/getUserDetails', authenticateToken, async (req,res) => {
+router.get('/getUserDetails', auth, async (req,res) => {
     const user = await usersBL.getUser(req.user.email)
     return res.json(user)
 })
 
-router.post('/like', authenticateToken, async (req, res) => {
+router.post('/like', auth, async (req, res) => {
     const ifMatch = await usersBL.likeAndIfMatch(req.user.email, req.body.email)
     return res.json(ifMatch)
 })
 
-router.get('/getAllMatches', authenticateToken, async (req, res) => {
+router.get('/getAllMatches', auth, async (req, res) => {
     const users = await usersBL.getAllMatches(req.user.email)
     return res.json(users)
 })
 
-function authenticateToken(req, res, next){
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    if(token == null) return res.sendStatus(401)
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, email) => {
-        if(err) {
-            return res.sendStatus(403)
-        }
-        req.user = email
-        next();
+// function authenticateToken(req, res, next){
+//     const authHeader = req.headers['authorization']
+//     const token = authHeader && authHeader.split(' ')[1]
+//     if(token == null) return res.sendStatus(401)
+//     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, email) => {
+//         if(err) {
+//             return res.sendStatus(403)
+//         }
+//         req.user = email
+//         next();
 
-    })
-}
+//     })
+// }
 
 module.exports = router

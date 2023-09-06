@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import styles from "./Chat.module.css";
-import assistIcon from "../../pages/ChatBot/bot-avatar.png"
 import chatIcon from "./chat-icon.png";
+import botIcon from "./robot-icon.png";
 import gameIcon from "./board-game-icon.png";
 
-const Chat = ({ name, message, profilePic, timestamp }) => {
+const Chat = ({ name, email, message, profilePic, timestamp }) => {
   const userDetails = {
     name: name,
+    email: email,
     pic: profilePic
   }
 
@@ -31,18 +32,25 @@ const Chat = ({ name, message, profilePic, timestamp }) => {
           <h2>{name}</h2>
           <p>{message}</p>
         </div>
-        
         <div>
+          <Link to="/chatbot">
           <IconButton color="primary" style={buttonBorderStyle}>
-          <img src={chatIcon} alt="Icon" width="70" height="70" />
+          <img src={chatIcon} alt="Icon" width="50" height="50" />
           </IconButton>
+          </Link>
           <IconButton color="primary" style={buttonBorderStyle}>
-          <img src={gameIcon} alt="Icon" width="70" height="70" />
+          <img src={gameIcon} alt="Icon" width="50" height="50" />
           </IconButton>
+          <Link to={{
+          pathname: `/chatbot`,
+            }}
+          state= { userDetails }
+          >
           <IconButton color="primary" style={buttonBorderStyle}>
             {/* Add your base icon here */}
-            <img src={assistIcon} alt="Icon" width="70" height="70" />
+            <img src={botIcon} alt="Icon" width="50" height="50" />
           </IconButton>
+          </Link>
         </div>
         <p className={styles.chat__timestamp}>{timestamp}</p>
       </div>

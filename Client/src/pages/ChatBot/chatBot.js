@@ -1,19 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
 import classes from './chatBot.module.css'
 import ChatBot from "react-simple-chatbot"
-import { Segment } from "semantic-ui-react"
 import instance from "../../rest-utils"
-import myAvatar from './bot-avatar.png';
-import idanPic from './idan.jpg'
+import botIcon from "../../components/Chat/robot-icon.png";
+import { useLocation } from "react-router-dom";
 
-function AnswerFromGPT() {
+function AnswerFromGPT({user2_email}) {
     const [answer, setAnswer] = useState('ohad');
 
     const getAnswer = useCallback(async () => {
-        const resp = await instance.get('assistantAI/getRestaurant', {
+        const token = window.localStorage.getItem('token')
+        const resp = await instance.get('assistantAI/getPlaylist', {
+            headers:
+            {"Authorization" : `Bearer ${token}` },
             params: {
-                id_user1: '64df438702096c11c3b479e5',
-                id_user2: '64df43db02096c11c3b479e6'
+                email: user2_email,
             }
         })
         setAnswer(resp.data)
@@ -34,25 +35,27 @@ function AnswerFromGPT() {
 
 function ChatBotComp() {
 
+    let { state } = useLocation();
+
     const steps = [
         {
             id:"Greet",
-            message:'Hello, Eran!',
+            message:`Hello, ${state.name}`,
             trigger:"Show Menu"
         },
         {
             id:"Show Menu",
-            options: [{value: "restaurant", label: "Find me a restaurant for a date", trigger: "RestChosen" },
+            options: [{value: "playlist", label: "Craft Me A Shared Playlist", trigger: "PlaylistChosen" },
                     {value: "conversation", label: "Find me a topic of conversation", trigger: "ConvChosen"}]
         },
         {
-            id:"RestChosen",
-            component: <AnswerFromGPT />,
+            id:"PlaylistChosen",
+            component: <AnswerFromGPT user2_email={state.email}/>,
             trigger:"Another Help"
         },
         {
             id:"ConvChosen",
-            component: <AnswerFromGPT />,
+            component: <AnswerFromGPT  user2_email={state.email}/>,
             trigger:"Another Help"
         },
         {
@@ -72,11 +75,10 @@ function ChatBotComp() {
         },
 
     ]
-    //trigger: () => handleLinkClick('https://www.wikipedia.org')
     return (
         <>
         <div className={classes.chatBot}>
-            <ChatBot hideSubmitButton="true" headerTitle="Your AI Assist" width="450px" botAvatar={myAvatar} userAvatar={idanPic} steps={steps}/>
+            <ChatBot hideSubmitButton="true" headerTitle="Your AI Assist" width="450px" botAvatar={botIcon} userAvatar={state.pic} steps={steps}/>
         </div>
         {/* <Segment floated="right">
             <ChatBot steps={steps}/>
