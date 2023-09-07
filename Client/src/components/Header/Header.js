@@ -4,9 +4,8 @@ import ForumIcon from "@mui/icons-material/Forum";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Link } from "react-router-dom";
-import AuthContext from '../../store/auth-context'
 import { UsersContext } from "../../store/usersContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 function Header({ backButtonPath }) {
   const { isLoggedIn } = useContext(UsersContext)

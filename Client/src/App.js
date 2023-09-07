@@ -5,35 +5,15 @@ import HomePage from "./pages/Home/Home";
 import RootLayout from "./pages/Root";
 import Login from "./pages/Login/Login"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthContext from './store/auth-context';
 import { UsersContext } from "./store/usersContext";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import SignUp from "./pages/SignUp/SignUp";
 import Game from "./components/tic-tac-toe/Game/Game"
 import Profile from "./pages/Profile/Profile";
 import Trivia from "./pages/Trivia/Trivia";
 import ChatBotComp from "./pages/ChatBot/chatBot"
-import instance from "../src/rest-utils"
-import Axios from 'axios';
 
 function App() {
-  const [user, setUser] = useState({});
-
-  Axios.defaults.withCredentials = true;
-
-  // useEffect(() => {
-  //   instance.get('/users/login').then((resp) => {
-  //     if(resp.data.loggedIn === true){
-  //         setUser(resp.data.user)
-  //     }
-  //   })
-    
-  // },[])
-  //const isLoggedIn = window.localStorage.getItem('LOGGED_IN')
-
-  //const authCtx = useContext(AuthContext);
-
-  //let isLoggedIn = authCtx.isLoggedIn
 
   const { isLoggedIn, setIsLoggedIn } = useContext(UsersContext)
 
@@ -49,8 +29,6 @@ function App() {
       path: '/',
       element: <RootLayout />,
       children: [
-        //{ path: '/', element: <HomePage /> },
-        //{path: '/login', element: <Login />},
         { path: '/', element: toRender},
         { path: '/chat', element: <ChatsPage /> },
         { path: '/chat/:person', element: <ChatScreen/>},

@@ -4,7 +4,6 @@ import TinderCard from 'react-tinder-card'
 import styles from './TinderCards.module.css'
 import instance from "../../rest-utils"
 import { UsersContext } from "../../store/usersContext";
-
 import buttonsStyles from "../SwipeButtons/SwipeButtons.module.css";
 import ReplayIcon from "@mui/icons-material/Replay";
 import CloseIcon from "@mui/icons-material/Close";
@@ -13,48 +12,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import IconButton from "@mui/material/IconButton";
 
-const db = [
-  {
-    email: '',
-    name: 'Richard Hendricks',
-    myPic: './img/richard.jpg'
-  },
-  {
-    name: 'Erlich Bachman',
-    myPic: './img/erlich.jpg'
-  },  
-  {
-    name: 'Monica Hall',
-    myPic: './img/monica.jpg'
-  },
-  {
-    name: 'Jared Dunn',
-    myPic: './img/jared.jpg'
-  },
-  {
-    name: 'Dinesh Chugtai',
-    myPic: './img/dinesh.jpg'
-  },
-  {
-    name: 'Ohad Segal',
-    myPic:'./img/ohad.jpg'
-  },
-  {
-    name: 'Eran Yosefia',
-    myPic:'./img/idan.jpg'
-  },
-  {
-    name: 'Idan Cohen',
-    myPic:'./img/eran.jpg'
-  }
-
-]
-
 const TinderCards = () => {
   const [db, setDb] = useState([])
-  const [currentIndex, setCurrentIndex] = useState(db.length - 1)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  // const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
-  const [user, setUser] = useState({});
   const currentIndexRef = useRef(currentIndex)
   const { token, setToken } = useContext(UsersContext)
 
@@ -67,14 +29,13 @@ const TinderCards = () => {
           {"Authorization" : `Bearer ${token2}` }
   }).then((resp) => {
       setDb(resp.data);
-      // db.push(...resp.data)
-      setCurrentIndex(db.length - 1)
+      setCurrentIndex(resp.data.length - 1)
   })
 },[])
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(7)
         .fill(0)
         .map((i) => React.createRef()),
     []
@@ -85,7 +46,6 @@ const TinderCards = () => {
     currentIndexRef.current = val
   }
   const canGoBack = currentIndex < db.length - 1
-
   const canSwipe = currentIndex >= 0
 
   // set last direction and decrease current index
@@ -157,37 +117,23 @@ const TinderCards = () => {
           </TinderCard>
         ))}
       </div>
-      <div className={styles.buttons}>
-        <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
-        <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
-        <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
-      </div>
-      {lastDirection ? (
-        <h2 key={lastDirection} className={styles.infoText}>
-          You swiped {lastDirection}
-        </h2>
-      ) : (
-        <h2 className={styles.infoText}>
-          Swipe a card or press a button to get Restore Card button visible!
-        </h2>
-      )}
       <div className={buttonsStyles.swipeButtons}>
       <IconButton className={buttonsStyles.swipeButtons__repeat}>
         <ReplayIcon fontSize="large" />
       </IconButton>
-      <IconButton className={buttonsStyles.swipeButtons__left}>
+      <IconButton className={buttonsStyles.swipeButtons__left} onClick={() => swipe('left')}>
         <CloseIcon fontSize="large" />
       </IconButton>
       <IconButton className={buttonsStyles.swipeButtons__star}>
         <StarRateIcon fontSize="large" />
       </IconButton>
-      <IconButton className={buttonsStyles.swipeButtons__right} onClick={() => { console.log('onClick'); }}>
+      <IconButton className={buttonsStyles.swipeButtons__right} onClick={() => swipe('right')}>
         <FavoriteIcon fontSize="large" />
       </IconButton>
       <IconButton className={buttonsStyles.swipeButtons__lightning}>
         <FlashOnIcon fontSize="large" />
       </IconButton>
-    </div>
+      </div>
     </div>
   )
 }

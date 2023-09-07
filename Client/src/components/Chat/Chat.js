@@ -7,15 +7,17 @@ import chatIcon from "./chat-icon.png";
 import botIcon from "./robot-icon.png";
 import gameIcon from "./board-game-icon.png";
 
-const Chat = ({ name, email, message, profilePic, timestamp }) => {
+const Chat = ({ name, email, message, profilePic, timestamp, myName, myPic }) => {
   const userDetails = {
     name: name,
     email: email,
-    pic: profilePic
+    pic: profilePic,
+    myName: myName,
+    myPic: myPic
   }
 
   const buttonBorderStyle = {
-    border: "2px solid #f0f0f0", // Customize the border properties as needed
+    border: "2px solid #f0f0f0",
     margin: "0 10px",
   };
 

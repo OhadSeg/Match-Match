@@ -1,12 +1,12 @@
 #root {
   background: #eee;
-  /* background: #132b41; */
-  overflow: hidden;
+  /* background: #1b1f23; */
   width: 100vw;
   min-height: 100vh;
   box-sizing: border-box;
   /* Add this line */
-  border: 10px solid #fff;
+  /* border: 10px solid #fff; */
+  border: 10px solid #1b1f23;
   border-radius: 50px;
   /* You can change 'red' to your desired border color and '2px' to your desired border width */
 }
@@ -16,7 +16,6 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 
 @keyframes App-logo-spin {
   from {

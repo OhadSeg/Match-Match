@@ -1,10 +1,8 @@
-
 import React, {
   useState,
   useReducer,
   useRef,
   useEffect,
-  useContext,
 } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import avatar from './profile.png'
@@ -12,7 +10,6 @@ import Card from "../../components/UI/Card/Card";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import classes from "./SignUp.module.css";
-import AuthContext from "../../store/auth-context";
 import instance from "../../rest-utils"
 
 const emailReducer = (state, action) => {
@@ -46,8 +43,6 @@ const textReducer = (state, action) => {
 };
 
 const SignUp = (props) => {
-  const authCtx = useContext(AuthContext);
-
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [firstNameState, dispatchFirstName] = useReducer(textReducer, {
@@ -128,11 +123,6 @@ const SignUp = (props) => {
   const { isValid: hobbyStateIsValid } = hobbyState;
   const { isValid: favoriteFoodStateIsValid } = musicTypeState;
   const { isValid: musicTypeStateIsValid } = passwordState;
-
-  // const { isValid: songsStateIsValid } = passwordState;
-  // const { isValid: bookStateIsValid } = passwordState;
-  // const { isValid: moviesStateIsValid } = passwordState;
-
   const { isValid: vacationSpotStateIsValid } = vacationSpotState;
   const { isValid: ageIsValid } = ageState;
   const { isValid: genderIsValid } = genderState;
@@ -223,7 +213,6 @@ const SignUp = (props) => {
         myPic: postImage
       };
       const resp = await instance.post('users/registration', user)
-      authCtx.onSignUp(user);
       navigate("/");
     } else {
       if (!firstNameIsValid) {

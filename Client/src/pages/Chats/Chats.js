@@ -7,6 +7,7 @@ import instance from "../../rest-utils"
 const ChatsPage = () => {
 
   const [matchedUsers, setMatchedUsers] = useState([])
+  const [myUser, setMyUser] = useState({})
   const { token, setToken } = useContext(UsersContext) 
 
   useEffect(() => {
@@ -17,6 +18,12 @@ const ChatsPage = () => {
           {"Authorization" : `Bearer ${token2}` }
   }).then((resp) => {
     setMatchedUsers(resp.data)
+  })
+  instance.get('/users/getUserDetails',{
+    headers:
+        {"Authorization" : `Bearer ${token2}` }
+  }).then((resp) => {
+    setMyUser(resp.data)
   })
 },[])
 
@@ -30,6 +37,8 @@ const ChatsPage = () => {
         message="Hasta La vista baby" 
         timestamp="6 mins ago" 
         profilePic={user.myPic}
+        myName={myUser.fname}
+        myPic={myUser.myPic}
         />
       ))}
   </div>;

@@ -4,8 +4,8 @@ const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get('/getPlaylist', auth, async (req,res) => {
-    const data = await assistantAIBL.createPlaylist(req.user.email, req.query.email);
+router.get('/getBotResponse', auth, async (req,res) => {
+    const data = await assistantAIBL.createBotResponse(req.query.req_type, req.user.email, req.query.email);
     return res.json(data)
 })
 
