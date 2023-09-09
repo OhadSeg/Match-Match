@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #eee;
+  background-color: #d6d4e0;
 }
 
 .fileUpload {
@@ -90,6 +90,6 @@ select {
   /* Increase the border-radius value */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   /* Increase the shadow */
-  background-color: #76b0ff;
+  background-color: #b8a9c9;
   border: 10px solid #F0F0F0
 }

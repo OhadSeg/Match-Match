@@ -1,56 +1,55 @@
 .triviaContainer {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 16px;
-  }
-  
-  .triviaHeader {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .triviaHeader h2 {
-    font-size: 24px;
-    margin: 15px 0;
-    color: #ff5a5f;
-  }
-  
-  .triviaQuestion {
-    margin-bottom: 20px;
-  }
-  
-  .triviaQuestion h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .triviaChoices {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .triviaChoices li {
-    margin-bottom: 10px;
-  }
-  
-  .triviaChoices button {
-    width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: none;
-    background-color: #eee;
-    margin-bottom: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .triviaChoices button.correctAnswer {
-    background-color: #4caf50;
-  }
-  
-  .triviaChoices button.wrongAnswer {
-    background-color: #f44336;
-    color: white;
-  }
-  
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.triviaHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.triviaHeader h2 {
+  font-size: 24px;
+  margin: 15px 0;
+  color: #ff5a5f;
+}
+
+.triviaQuestion {
+  margin-bottom: 20px;
+}
+
+.triviaQuestion h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.triviaChoices {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.triviaChoices li {
+  margin-bottom: 10px;
+}
+
+.triviaChoices button {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border-color: #ec7644;
+  background-color: #eee;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.triviaChoices button.correctAnswer {
+  background-color: #4caf50;
+}
+
+.triviaChoices button.wrongAnswer {
+  background-color: #f44336;
+  color: white;
+}

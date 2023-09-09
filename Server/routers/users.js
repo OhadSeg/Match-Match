@@ -44,8 +44,8 @@ router.get('/getUserDetails', auth, async (req,res) => {
 })
 
 router.post('/like', auth, async (req, res) => {
-    const ifMatch = await usersBL.likeAndIfMatch(req.user.email, req.body.email)
-    return res.json(ifMatch)
+    const user2 = await usersBL.likeAndIfMatch(req.user.email, req.body.email)
+    return res.json(user2)
 })
 
 router.get('/getAllMatches', auth, async (req, res) => {

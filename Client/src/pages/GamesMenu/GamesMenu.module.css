@@ -1,0 +1,43 @@
+/* GamesMenu.module.css */
+
+/* Center the link */
+.chat {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh; */
+    /* This ensures that the link is vertically centered in the viewport */
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    flex-direction: column;
+}
+
+/* Make the link bigger */
+.chat__image a {
+    transform: scale(1.5);
+
+    /* You can adjust the scale factor as needed */
+    transition: transform 0.2s ease;
+    margin: 50px;
+
+    /* Add a smooth transition for the scaling effect */
+}
+
+/* Add hover effect for the link */
+.chat__image a:hover {
+    transform: scale(2.0);
+
+    /* Increase the scale factor on hover */
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #622569;
+    margin-bottom: 3ch;
+}

@@ -64,7 +64,7 @@ const Profile = () => {
                     <strong>Interested in:</strong> {user.interested_in}
                 </div>
             </div>
-            <button onClick={logoutHandler}>Logout</button>
+            <button onClick={logoutHandler} className={classes.logout}>Logout</button>
         </div>
     );
 }

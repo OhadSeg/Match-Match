@@ -14,6 +14,16 @@
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    text-align: center;
+    /* Center text and image */
+
+    animation: slideIn 0.5s ease;
+}
+
+.matchImage {
+    max-width: 100px;
+    /* Adjust the image size as needed */
+    margin-bottom: 20px;
 }
 
 .matchTitle {
@@ -30,6 +40,13 @@
     margin-bottom: 20px;
 }
 
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* Ensure buttons span the width */
+}
+
 .matchButton {
     background-color: #ff4500;
     /* Orange background color for the button */
@@ -39,11 +56,25 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .matchButton:hover {
     background-color: #ff5722;
+    transform: scale(1.05);
     /* Darker orange color on hover */
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* Add more styling as needed */

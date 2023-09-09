@@ -10,7 +10,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-color: #e7f5ff;
     border: 10px solid #d7d3d3;
-    background-color: rgb(235, 193, 192);
+    background-color: #b8a9c9;
+    /* background-color: rgb(235, 193, 192); */
 }
 
 a {
@@ -33,4 +34,10 @@ a {
 
 .chat__timestamp {
     color: lightgray;
+}
+
+.chat__icon:hover {
+    transform: scale(1.3);
+
+    /* Increase the scale factor on hover */
 }

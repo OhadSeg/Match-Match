@@ -78,10 +78,17 @@ const likeAndIfMatch = async function (userEmail, likedUserEmail) {
             await userModel.updateOne({ email: userEmail }, user);
             await userModel.updateOne({ email: likedUserEmail }, likedUser);
 
-            return likedUser.liked.includes(user.email);
+            if(likedUser.liked.includes(user.email))
+            {
+                return user2 = {name: `${likedUser.fname} ${likedUser.lname}`,
+                                pic: likedUser.myPic}
+            }
+            else{
+                return null
+            }
         } else {
             // If likedUser is already in the liked list, return false (no match)
-            return false;
+            return null;
         }
     } catch (error) {
         // Handle any errors here

@@ -1,6 +1,6 @@
 .chatScreen__text {
   margin-left: 10px;
-  background-color: lightgray;
+  background-color: #b8a9c9;
   padding: 15px;
   border-radius: 20px;
 }
@@ -9,17 +9,32 @@
   display: flex;
   padding: 20px;
   align-items: center;
+  font-size: 2ch;
 }
 
 .chatScreen__timestamp {
   text-align: center;
   padding: 20px;
   color: rgb(23, 18, 18);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.chatScreen {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  /* background-color: #b8a9c9; */
+  border-color: #e7f5ff;
+  border: 10px solid #F0F0F0;
+  /* height: 100%; */
 }
 
 .chatScreen__owntext {
   margin-left: auto;
-  background-color: #29b3cd;
+  background-color: #7f3787;
   padding: 15px;
   border-radius: 20px;
   color: white;
@@ -28,14 +43,14 @@
 .chatScreen__form {
   display: flex;
   padding: 5px;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 100%;
   border-top: 1px solid lightgray;
 }
 
 .chatScreen__input {
-  flex: 1;
+  flex: 4;
   padding: 10px;
   border: none;
 }
@@ -70,4 +85,12 @@
 
 .chatScreen__image {
   margin-right: 20px;
+}
+
+.chatScreen__image2 {
+  margin-left: 20px;
+}
+
+.chatScreen__image:hover {
+  transform: scale(1.1);
 }

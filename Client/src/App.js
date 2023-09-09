@@ -12,6 +12,7 @@ import Game from "./components/tic-tac-toe/Game/Game"
 import Profile from "./pages/Profile/Profile";
 import Trivia from "./pages/Trivia/Trivia";
 import ChatBotComp from "./pages/ChatBot/chatBot"
+import GamesMenu from "./pages/GamesMenu/GamesMenu"
 
 function App() {
 
@@ -36,7 +37,8 @@ function App() {
         {path:'/game', element: <Game/>},
         {path:'/profile',element:<Profile/>},
         {path:'/trivia',element:<Trivia/>},
-        {path: '/chatbot',element:<ChatBotComp/>}
+        {path: '/chatbot',element:<ChatBotComp/>},
+        {path: 'gameMenu',element:<GamesMenu/>},
       ]
     }
   ]);

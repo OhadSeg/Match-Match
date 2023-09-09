@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useRef, useEffect, useContext } from 'react'
-import SwipeButtons from '../SwipeButtons/SwipeButtons';
 import TinderCard from 'react-tinder-card'
 import styles from './TinderCards.module.css'
 import instance from "../../rest-utils"
@@ -11,6 +10,7 @@ import StarRateIcon from "@mui/icons-material/StarRate";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import IconButton from "@mui/material/IconButton";
+import MatchPopup from "../Popup/Popup";
 
 const TinderCards = () => {
   const [db, setDb] = useState([])
@@ -19,6 +19,8 @@ const TinderCards = () => {
   const [lastDirection, setLastDirection] = useState()
   const currentIndexRef = useRef(currentIndex)
   const { token, setToken } = useContext(UsersContext)
+  const [isMatch, setIsMatch] = useState(false)
+  const [mathcedUser, setMathcedUser] = useState({})
 
 
   useEffect(() => {
@@ -58,14 +60,19 @@ const TinderCards = () => {
         headers:
             {"Authorization" : `Bearer ${token2}` }
     }).then((resp) => {
-        if(resp.data === 'true')
-        {
-          console.log("There is match!!")
-          //pop windows with fireworks!! something beautifull and in this window will be a rout to there chat!
-        }
+      if(resp.data)
+      {
+        setMathcedUser(resp.data)
+        setIsMatch(true)
+      }
+
     })
     }
   }
+
+  const closePopUp = () =>{
+    setIsMatch(false)
+}
 
   const outOfFrame = (name, idx) => {
     // handle the case in which go back is pressed before card goes outOfFrame
@@ -134,6 +141,11 @@ const TinderCards = () => {
         <FlashOnIcon fontSize="large" />
       </IconButton>
       </div>
+      {isMatch && <MatchPopup onClose={closePopUp
+    } userData={
+      {mathcedUser}
+    }></MatchPopup>
+  }
     </div>
   )
 }

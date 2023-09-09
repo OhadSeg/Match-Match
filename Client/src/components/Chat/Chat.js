@@ -35,20 +35,24 @@ const Chat = ({ name, email, message, profilePic, timestamp, myName, myPic }) =>
           <p>{message}</p>
         </div>
         <div>
-          <Link to="/chatbot">
-          <IconButton color="primary" style={buttonBorderStyle}>
+          <IconButton color="primary" className={styles.chat__icon} style={buttonBorderStyle}>
           <img src={chatIcon} alt="Icon" width="50" height="50" />
           </IconButton>
-          </Link>
-          <IconButton color="primary" style={buttonBorderStyle}>
+          <Link to={{
+          pathname: `/gameMenu`,
+            }}
+          state= { userDetails }
+          >
+          <IconButton color="primary" className={styles.chat__icon} style={buttonBorderStyle}>
           <img src={gameIcon} alt="Icon" width="50" height="50" />
           </IconButton>
+          </Link>
           <Link to={{
           pathname: `/chatbot`,
             }}
           state= { userDetails }
           >
-          <IconButton color="primary" style={buttonBorderStyle}>
+          <IconButton color="primary" className={styles.chat__icon} style={buttonBorderStyle}>
             {/* Add your base icon here */}
             <img src={botIcon} alt="Icon" width="50" height="50" />
           </IconButton>
