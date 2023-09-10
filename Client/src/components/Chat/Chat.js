@@ -7,26 +7,36 @@ import chatIcon from "./chat-icon.png";
 import botIcon from "./robot-icon.png";
 import gameIcon from "./board-game-icon.png";
 
-const Chat = ({ name, email, message, profilePic, timestamp, myName, myPic }) => {
+const Chat = ({
+  name,
+  email,
+  message,
+  profilePic,
+  timestamp,
+  myName,
+  myPic,
+  index,
+}) => {
   const userDetails = {
+    index: index,
     name: name,
     email: email,
     pic: profilePic,
     myName: myName,
-    myPic: myPic
-  }
+    myPic: myPic,
+  };
 
   const buttonBorderStyle = {
     border: "2px solid #f0f0f0",
     margin: "0 10px",
   };
 
-
   return (
-    <Link to={{
-      pathname: `/chat/${name}`,
-    }}
-      state= { userDetails }
+    <Link
+      to={{
+        pathname: `/chat/${name}`,
+      }}
+      state={userDetails}
     >
       <div className={styles.chat}>
         <Avatar className={styles.chat__image} src={profilePic} />
@@ -35,27 +45,41 @@ const Chat = ({ name, email, message, profilePic, timestamp, myName, myPic }) =>
           <p>{message}</p>
         </div>
         <div>
-          <IconButton color="primary" className={styles.chat__icon} style={buttonBorderStyle}>
-          <img src={chatIcon} alt="Icon" width="50" height="50" />
-          </IconButton>
-          <Link to={{
-          pathname: `/gameMenu`,
-            }}
-          state= { userDetails }
+          <IconButton
+            color="primary"
+            className={styles.chat__icon}
+            style={buttonBorderStyle}
           >
-          <IconButton color="primary" className={styles.chat__icon} style={buttonBorderStyle}>
-          <img src={gameIcon} alt="Icon" width="50" height="50" />
+            <img src={chatIcon} alt="Icon" width="50" height="50" />
           </IconButton>
+          <Link
+            to={{
+              pathname: `/gameMenu`,
+            }}
+            state={userDetails}
+          >
+            <IconButton
+              color="primary"
+              className={styles.chat__icon}
+              style={buttonBorderStyle}
+            >
+              <img src={gameIcon} alt="Icon" width="50" height="50" />
+            </IconButton>
           </Link>
-          <Link to={{
-          pathname: `/chatbot`,
+          <Link
+            to={{
+              pathname: `/chatbot`,
             }}
-          state= { userDetails }
+            state={userDetails}
           >
-          <IconButton color="primary" className={styles.chat__icon} style={buttonBorderStyle}>
-            {/* Add your base icon here */}
-            <img src={botIcon} alt="Icon" width="50" height="50" />
-          </IconButton>
+            <IconButton
+              color="primary"
+              className={styles.chat__icon}
+              style={buttonBorderStyle}
+            >
+              {/* Add your base icon here */}
+              <img src={botIcon} alt="Icon" width="50" height="50" />
+            </IconButton>
           </Link>
         </div>
         <p className={styles.chat__timestamp}>{timestamp}</p>
