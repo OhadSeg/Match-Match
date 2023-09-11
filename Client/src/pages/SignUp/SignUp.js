@@ -1,16 +1,11 @@
-import React, {
-  useState,
-  useReducer,
-  useRef,
-  useEffect,
-} from "react";
+import React, { useState, useReducer, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import avatar from './profile.png'
+import avatar from "./profile.png";
 import Card from "../../components/UI/Card/Card";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import classes from "./SignUp.module.css";
-import instance from "../../rest-utils"
+import instance from "../../rest-utils";
 
 const emailReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
@@ -106,8 +101,7 @@ const SignUp = (props) => {
     isValid: null,
   });
 
-  const [postImage, setPostImage] = useState("")
-
+  const [postImage, setPostImage] = useState("");
 
   const navigate = useNavigate();
 
@@ -133,26 +127,37 @@ const SignUp = (props) => {
     const identifier = setTimeout(() => {
       setFormIsValid(
         firstNameIsValid &&
-        lastNameIsValid &&
-        emailIsValid &&
-        passwordIsValid &&
-        hobbyStateIsValid &&
-        favoriteFoodStateIsValid &&
-        musicTypeStateIsValid &&
-        vacationSpotStateIsValid &&
-        ageIsValid &&
-        genderIsValid &&
-        residenceIsValid &&
-        interested_inIsValid
-      );      
+          lastNameIsValid &&
+          emailIsValid &&
+          passwordIsValid &&
+          hobbyStateIsValid &&
+          favoriteFoodStateIsValid &&
+          musicTypeStateIsValid &&
+          vacationSpotStateIsValid &&
+          ageIsValid &&
+          genderIsValid &&
+          residenceIsValid &&
+          interested_inIsValid
+      );
     }, 500);
 
     return () => {
       clearTimeout(identifier);
     };
-  }, [firstNameIsValid, lastNameIsValid, emailIsValid, passwordIsValid, hobbyStateIsValid,
-    favoriteFoodStateIsValid, musicTypeStateIsValid, vacationSpotStateIsValid, ageIsValid, genderIsValid,
-    residenceIsValid, interested_inIsValid]);
+  }, [
+    firstNameIsValid,
+    lastNameIsValid,
+    emailIsValid,
+    passwordIsValid,
+    hobbyStateIsValid,
+    favoriteFoodStateIsValid,
+    musicTypeStateIsValid,
+    vacationSpotStateIsValid,
+    ageIsValid,
+    genderIsValid,
+    residenceIsValid,
+    interested_inIsValid,
+  ]);
 
   const firstNameChangeHandler = (event) => {
     dispatchFirstName({ type: "USER_INPUT", val: event.target.value });
@@ -187,9 +192,9 @@ const SignUp = (props) => {
   };
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    const base64 = await convertToBase64(file)
-    setPostImage(base64)
-  }
+    const base64 = await convertToBase64(file);
+    setPostImage(base64);
+  };
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -210,9 +215,9 @@ const SignUp = (props) => {
         movies: moviesState.value,
         favorite_vacation_spot: vacationSpotState.value,
         interested_in: interested_inState.value,
-        myPic: postImage
+        myPic: postImage,
       };
-      const resp = await instance.post('users/registration', user)
+      const resp = await instance.post("users/registration", user);
       navigate("/");
     } else {
       if (!firstNameIsValid) {
@@ -231,15 +236,19 @@ const SignUp = (props) => {
     <Card className={classes.signup}>
       <form onSubmit={submitHandler} className={classes.formContainer}>
         <label htmlFor="file-upload" className={classes.customFileUpload}>
-          <img className={classes.profilePic} src={postImage || avatar} alt="" />
+          <img
+            className={classes.profilePic}
+            src={postImage || avatar}
+            alt=""
+          />
           <input
-              className={classes.fileUpload}
-              type="file"
-              label="Image"
-              name="myFile"
-              id="file-upload"
-              accept=".jpeg, .png, .jpg"
-              onChange={(e) => handleFileUpload(e)}
+            className={classes.fileUpload}
+            type="file"
+            label="Image"
+            name="myFile"
+            id="file-upload"
+            accept=".jpeg, .png, .jpg"
+            onChange={(e) => handleFileUpload(e)}
           />
         </label>
         <Input
@@ -282,7 +291,7 @@ const SignUp = (props) => {
           onChange={passwordChangeHandler}
           onBlur={validatePasswordHandler}
         />
-         <Input
+        <Input
           id="age"
           label="Age"
           type="text"
@@ -294,14 +303,17 @@ const SignUp = (props) => {
           onBlur={() => dispatchAge({ type: "INPUT_BLUR" })}
         />
         <div className="gender-container">
-          <label className='gender-label' htmlFor="gender">Gender:<label className={classes.genderHelper}>.................</label></label>
+          <label className="gender-label" htmlFor="gender">
+            Gender:
+            <label className={classes.genderHelper}>.................</label>
+          </label>
           <select
-              id="gender"
-              value={genderState.value}
-              onChange={(event) =>
-                  dispatchGender({ type: "USER_INPUT", val: event.target.value })
-              }
-              onBlur={() => dispatchGender({ type: "INPUT_BLUR" })}
+            id="gender"
+            value={genderState.value}
+            onChange={(event) =>
+              dispatchGender({ type: "USER_INPUT", val: event.target.value })
+            }
+            onBlur={() => dispatchGender({ type: "INPUT_BLUR" })}
           >
             <option value="">Select Gender</option> {/* Blank option */}
             <option value="male">Male</option>
@@ -406,21 +418,22 @@ const SignUp = (props) => {
         <div className="interested-in-container">
           <label htmlFor="interested_in">Who are you interested in?</label>
           <select
-              id="interested_in"
-              value={interested_inState.value}
-              onChange={(event) =>
-                  dispatchInterested_in({ type: "USER_INPUT", val: event.target.value })
-              }
-              onBlur={() => dispatchInterested_in({ type: "INPUT_BLUR" })}
+            id="interested_in"
+            value={interested_inState.value}
+            onChange={(event) =>
+              dispatchInterested_in({
+                type: "USER_INPUT",
+                val: event.target.value,
+              })
+            }
+            onBlur={() => dispatchInterested_in({ type: "INPUT_BLUR" })}
           >
             <option value="">Select Interest</option> {/* Blank option */}
-            <option value="males">Males</option>
-            <option value="females">Females</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
             <option value="both">Both</option>
           </select>
         </div>
-
-
 
         <div className={classes.actions}>
           <Button type="submit">Sign Up</Button>
@@ -433,15 +446,15 @@ const SignUp = (props) => {
 
 export default SignUp;
 
-function convertToBase64(file){
+function convertToBase64(file) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
-      resolve(fileReader.result)
+      resolve(fileReader.result);
     };
     fileReader.onerror = (error) => {
-      reject(error)
-    }
-  })
+      reject(error);
+    };
+  });
 }
