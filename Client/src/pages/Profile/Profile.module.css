@@ -72,7 +72,8 @@
 }
 
 .profileDetailes strong {
-  color: darkslateblue;
+  color: #622569;
+  /* color: darkslateblue; */
   /* Tinder red */
   margin-right: 5px;
 }

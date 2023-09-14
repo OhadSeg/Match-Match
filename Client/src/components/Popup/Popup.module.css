@@ -30,7 +30,7 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #ff4500;
+    color: #622569;
     /* Orange color for the "match" text */
 }
 
@@ -48,7 +48,7 @@
 }
 
 .matchButton {
-    background-color: #ff4500;
+    background-color: #622569;
     /* Orange background color for the button */
     color: white;
     font-size: 18px;
@@ -60,9 +60,8 @@
 }
 
 .matchButton:hover {
-    background-color: #ff5722;
+    background-color: #4b1060;
     transform: scale(1.05);
-    /* Darker orange color on hover */
 }
 
 @keyframes slideIn {
